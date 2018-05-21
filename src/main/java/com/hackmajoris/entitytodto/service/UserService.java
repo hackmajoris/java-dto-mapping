@@ -11,12 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    public DTOEntity createUser(){
-        User user = new User();
-        user.setId(1);
-        user.setName("User number 1");
-        user.setEmail("Email number 1");
-        user.setPassword("Password number 1");
+    public DTOEntity createUser(DTOEntity userCreateDto){
+        // Let's convert DTO to Entity and then again - Entity to DTO
+        User user = (User) new DtoUtils().convertToEntity(new User(), userCreateDto);
 
         return new DtoUtils().convertToDto(user, new UserCreateDTO());
     }
@@ -31,10 +28,9 @@ public class UserService {
         return new DtoUtils().convertToDto(user, new UserReadDTO());
     }
 
-    public DTOEntity updateUser(DTOEntity userDTO) {
-        User user = (User) new DtoUtils().convertToEntity(new User(), userDTO);
-
-        System.out.println(user.toString());
+    public DTOEntity updateUser(DTOEntity userUpdateDTO) {
+        // Let's convert DTO to Entity and then again - Entity to DTO
+        User user = (User) new DtoUtils().convertToEntity(new User(), userUpdateDTO);
 
         return new DtoUtils().convertToDto(user, new UserUpdateDTO());
     }

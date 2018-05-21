@@ -23,7 +23,7 @@ public class UserController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public DTOEntity createPost(@RequestBody UserCreateDTO userCreateDTO) {
-        return updateService.createUser();
+        return updateService.createUser(userCreateDTO);
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
