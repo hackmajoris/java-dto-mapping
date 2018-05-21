@@ -11,7 +11,7 @@
 
 # Description
 
-Sometime you may need to use DTO's(Data Transfer Objects) in your application in order to hide some entity data(usually) in your REST'full API. For instance: You have a User entity which has some field: username, email, password, ID.
+Sometime you may need to use DTO's(Data Transfer Objects) in your application in order to hide some entity data(usually) in your REST'full API. For instance: You have a User entity which has some fields: username, email, password, ID.
 You have an API which performs some CRUD operations on this entity and you want to hide user password at the moment when GET(only) operation is performed.
 For such a feature you need to have a DTO Entity where you exclude the password field from the base Entity. You need somehow to map all the attributes from base entity to DTO entity end vice-versa
 and it is nice if you'll do this automatically without mapping the attributes manually.
