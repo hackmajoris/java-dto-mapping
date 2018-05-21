@@ -11,13 +11,12 @@
 
 # Description
 
-Sometime you may need to user DTO(Data Transfer Objects) in your application in order to 
-hide some entity data(usually). For instante: You have an User entity which has some field: username, email, password, ID.
-You have an API which perform some CRUD operations on this entity and you want to hide user password at the moment when GET(only) operation is performed.
-For such a feature you need to have a DTO Entity where you exclude the password field from the base Entity. You need somehow to map all the attributes from base entity to DTO entity end vise versa
-and it be nice if you'll do this automatically without mapping the attributes manually.
+Sometime you may need to user DTO(Data Transfer Objects) in your application in order to hide some entity data(usually). For instance: You have a User entity which has some field: username, email, password, ID.
+You have an API which performs some CRUD operations on this entity and you want to hide user password at the moment when GET(only) operation is performed.
+For such a feature you need to have a DTO Entity where you exclude the password field from the base Entity. You need somehow to map all the attributes from base entity to DTO entity end vice-versa
+and it is nice if you'll do this automatically without mapping the attributes manually.
 
-Here is how we can achieve this using ModelMapping..
+Here is how we can achieve this using ModelMapping...
 
 ## Project structure.
 
