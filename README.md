@@ -37,54 +37,54 @@ Here we have a simple User class with some attributes.
  ```java
 public class User {
 
-private int id;
-private String name;
-private String email;
-private String password;
+ private int id;
+ private String name;
+ private String email;
+ private String password;
 
-public User() {}
+ public User() {}
 
-public int getId() {
-return id;
-}
+ public int getId() {
+  return id;
+ }
 
-public void setId(int id) {
-this.id = id;
-}
+ public void setId(int id) {
+  this.id = id;
+ }
 
-public String getName() {
-return name;
-}
+ public String getName() {
+  return name;
+ }
 
-public void setName(String name) {
-this.name = name;
-}
+ public void setName(String name) {
+  this.name = name;
+ }
 
-public String getEmail() {
-return email;
-}
+ public String getEmail() {
+  return email;
+ }
 
-public void setEmail(String email) {
-this.email = email;
-}
+ public void setEmail(String email) {
+  this.email = email;
+ }
 
-public String getPassword() {
-return password;
-}
+ public String getPassword() {
+  return password;
+ }
 
-public void setPassword(String password) {
-this.password = password;
-}
+ public void setPassword(String password) {
+  this.password = password;
+ }
 
-@Override
-public String toString() {
-return "User{" +
-"id=" + id +
-", name='" + name + '\'' +
-", email='" + email + '\'' +
-", password='" + password + '\'' +
-'}';
-}
+ @Override
+ public String toString() {
+  return "User{" +
+  "id=" + id +
+  ", name='" + name + '\'' +
+  ", email='" + email + '\'' +
+  ", password='" + password + '\'' +
+  '}';
+  }
 }
 
  ```
@@ -97,52 +97,49 @@ Here is a simple User service implementation. The database connection and data p
 @Service
 public class UserService {
 
-public DTOEntity createUser(){
-User user = new User();
-user.setId(1);
-user.setName("User number 1");
-user.setEmail("Email number 1");
-user.setPassword("Password number 1");
+ public DTOEntity createUser(){
+  User user = new User();
+  user.setId(1);
+  user.setName("User number 1");
+  user.setEmail("Email number 1");
+  user.setPassword("Password number 1");
 
-return new DtoUtils().convertToDto(user, new UserCreateDTO());
-}
+  return new DtoUtils().convertToDto(user, new UserCreateDTO());
+ }
 
-public DTOEntity readUser(){
-User user = new User();
-user.setId(1);
-user.setName("User number 1");
-user.setEmail("Email number 1");
-user.setPassword("Password number 1");
+ public DTOEntity readUser(){
+  User user = new User();
+  user.setId(1);
+  user.setName("User number 1");
+  user.setEmail("Email number 1");
+  user.setPassword("Password number 1");
 
-return new DtoUtils().convertToDto(user, new UserReadDTO());
-}
+  return new DtoUtils().convertToDto(user, new UserReadDTO());
+ }
 
-public DTOEntity updateUser(DTOEntity userDTO) {
-User user = (User) new DtoUtils().convertToEntity(new User(), userDTO);
+ public DTOEntity updateUser(DTOEntity userDTO) {
+  User user = (User) new DtoUtils().convertToEntity(new User(), userDTO);
 
-System.out.println(user.toString());
+  System.out.println(user.toString());
 
-return new DtoUtils().convertToDto(user, new UserUpdateDTO());
-}
+  return new DtoUtils().convertToDto(user, new UserUpdateDTO());
+ }
 }
 
  ```
-
 ## TDO Utils 
 
 The important part here is this utility class: 
 
  ```java
 public class DtoUtils {
+ public DTOEntity convertToDto(Object obj, DTOEntity mapper) {
+  return new ModelMapper().map(obj, mapper.getClass());
+ }
 
-public DTOEntity convertToDto(Object obj, DTOEntity mapper) {
-return new ModelMapper().map(obj, mapper.getClass());
-}
-
-public Object convertToEntity(Object obj, DTOEntity mapper) {
-return new ModelMapper().map(mapper, obj.getClass());
-}
-
+ public Object convertToEntity(Object obj, DTOEntity mapper) {
+  return new ModelMapper().map(mapper, obj.getClass());
+ }
 }
 
  ```
@@ -156,33 +153,33 @@ Now, the DTO's entities.
  ```java
 public class UserReadDTO implements DTOEntity {
 
-private String name;
-private String email;
+ private String name;
+ private String email;
 
-public UserReadDTO(){}
+ public UserReadDTO(){}
 
-public String getName() {
-return name;
-}
+ public String getName() {
+  return name;
+ }
 
-public void setName(String name) {
-this.name = name;
-}
+ public void setName(String name) {
+  this.name = name;
+ }
 
-public String getEmail() {
-return email;
-}
+ public String getEmail() {
+  return email;
+ }
 
-public void setEmail(String email) {
-this.email = email;
-}
+ public void setEmail(String email) {
+  this.email = email;
+ }
 }
  ```
 
 Here we implemented DTOEntity interface: 
 
  ```java
-public interface DTOEntity {}
+ public interface DTOEntity {}
  ```
 
 in order to have a generic mapping. So all our DTO's will implement this interface.
@@ -199,29 +196,28 @@ Now, that we have all needed models and helpers, our controller looks in this wa
 @RequestMapping("api/")
 public class UserController {
 
-private UserService updateService;
+ private UserService updateService;
 
-@Autowired
-public UserController(UserService updateService){
-this.updateService = updateService;
-}
+ @Autowired
+ public UserController(UserService updateService){
+  this.updateService = updateService;
+ }
 
-@RequestMapping(value = "/create", method = RequestMethod.POST)
-public DTOEntity createPost(@RequestBody UserCreateDTO userCreateDTO) {  
-return updateService.createUser();
-}
+ @RequestMapping(value = "/create", method = RequestMethod.POST)
+ public DTOEntity createPost(@RequestBody UserCreateDTO userCreateDTO) {  
+  return updateService.createUser();
+ }
 
-@RequestMapping(value = "/list", method = RequestMethod.GET)
-public DTOEntity readUser() {
-return updateService.readUser();
-}
+ @RequestMapping(value = "/list", method = RequestMethod.GET)
+ public DTOEntity readUser() {
+  return updateService.readUser();
+ }
 
-@RequestMapping(value = "/update", method = RequestMethod.PATCH)
-public DTOEntity updateUser(@RequestBody UserUpdateDTO userUpdateDTO) {
+ @RequestMapping(value = "/update", method = RequestMethod.PATCH)
+ public DTOEntity updateUser(@RequestBody UserUpdateDTO userUpdateDTO) {
 
-return updateService.updateUser(userUpdateDTO);
-}
-
+  return updateService.updateUser(userUpdateDTO);
+ }
 }
  ```
 
@@ -233,40 +229,38 @@ public class UserDtoUnitTest {
 @Test
 public void userEntityToUserDto() {
 
-// Given
-User user = new User();
-user.setId(1);
-user.setEmail("user1@example.com");
-user.setName("user1");
-user.setPassword("user1Password");
+ // Given
+ User user = new User();
+ user.setId(1);
+ user.setEmail("user1@example.com");
+ user.setName("user1");
+ user.setPassword("user1Password");
 
-// When
-UserCreateDTO userCreateDTO =  (UserCreateDTO) new DtoUtils().convertToDto(user, new UserCreateDTO());
+ // When
+ UserCreateDTO userCreateDTO =  (UserCreateDTO) new DtoUtils().convertToDto(user, new UserCreateDTO());
 
-// Then
-assertEquals(user.getEmail(), userCreateDTO.getEmail());
-assertEquals(user.getName(), userCreateDTO.getName());
-assertEquals(user.getPassword(), userCreateDTO.getPassword());
+ // Then
+ assertEquals(user.getEmail(), userCreateDTO.getEmail());
+ assertEquals(user.getName(), userCreateDTO.getName());
+ assertEquals(user.getPassword(), userCreateDTO.getPassword());
 }
 
-@Test
-public void userDtoToUserEntity() {
+ @Test
+ public void userDtoToUserEntity() {
+  // Given
+  UserCreateDTO userCreateDTO = new UserCreateDTO();
+  userCreateDTO.setEmail("user1@example.com");
+  userCreateDTO.setName("user1");
+  userCreateDTO.setPassword("user1Password");
 
-// Given
-UserCreateDTO userCreateDTO = new UserCreateDTO();
-userCreateDTO.setEmail("user1@example.com");
-userCreateDTO.setName("user1");
-userCreateDTO.setPassword("user1Password");
+  // When
+  User user =  (User) new DtoUtils().convertToEntity(new User(), userCreateDTO);
 
-// When
-User user =  (User) new DtoUtils().convertToEntity(new User(), userCreateDTO);
-
-// Then
-assertEquals(user.getEmail(), userCreateDTO.getEmail());
-assertEquals(user.getName(), userCreateDTO.getName());
-assertEquals(user.getPassword(), userCreateDTO.getPassword());
-}
-
+  // Then
+  assertEquals(user.getEmail(), userCreateDTO.getEmail());
+  assertEquals(user.getName(), userCreateDTO.getName());
+  assertEquals(user.getPassword(), userCreateDTO.getPassword());
+ }
 }
  ```
  
@@ -275,29 +269,29 @@ assertEquals(user.getPassword(), userCreateDTO.getPassword());
 ### User creation
 
  ```bash
-curl -X POST \
-http://localhost:8080/api/create \
--H 'Cache-Control: no-cache' \
--H 'Content-Type: application/json' \
--H 'Postman-Token: 76ac6fa4-41d1-481b-aa45-69b05096ebfb' \
--d '{"name":"User number 1","email":"Email number 2", "password": "userPassword"}'
+ curl -X POST \
+ http://localhost:8080/api/create \
+ -H 'Cache-Control: no-cache' \
+ -H 'Content-Type: application/json' \
+ -H 'Postman-Token: 76ac6fa4-41d1-481b-aa45-69b05096ebfb' \
+ -d '{"name":"User number 1","email":"Email number 2", "password": "userPassword"}'
  ```
 ### User update
  ```bash
-curl -X PATCH \
-http://localhost:8080/api/update \
--H 'Cache-Control: no-cache' \
--H 'Content-Type: application/json' \
--H 'Postman-Token: 460a1683-d6b4-4544-9f5e-80dd6a645749' \
--d '{"name":"User number 1","email":"Email number 2", "password": "pass"}'
+ curl -X PATCH \
+ http://localhost:8080/api/update \
+ -H 'Cache-Control: no-cache' \
+ -H 'Content-Type: application/json' \
+ -H 'Postman-Token: 460a1683-d6b4-4544-9f5e-80dd6a645749' \
+ -d '{"name":"User number 1","email":"Email number 2", "password": "pass"}'
  ```
 
 ### User read
  ```bash
-curl -X GET \
-http://localhost:8080/api/list \
--H 'Cache-Control: no-cache' \
--H 'Content-Type: application/json' \
--H 'Postman-Token: 24ff8d32-5357-411f-81f5-64dabcb2e4d1' \
--d '{"name":"User number 1","email":"Email number 2", "password": "pass"}'
+ curl -X GET \
+ http://localhost:8080/api/list \
+ -H 'Cache-Control: no-cache' \
+ -H 'Content-Type: application/json' \
+ -H 'Postman-Token: 24ff8d32-5357-411f-81f5-64dabcb2e4d1' \
+ -d '{"name":"User number 1","email":"Email number 2", "password": "pass"}'
  ```
