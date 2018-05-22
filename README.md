@@ -245,22 +245,22 @@ public void userEntityToUserDto() {
    assertEquals(user.getPassword(), userCreateDTO.getPassword());
   }
 
-   @Test
-   public void userDtoToUserEntity() {
-    // Given
-    UserCreateDTO userCreateDTO = new UserCreateDTO();
-    userCreateDTO.setEmail("user1@example.com");
-    userCreateDTO.setName("user1");
-    userCreateDTO.setPassword("user1Password");
+  @Test
+  public void userDtoToUserEntity() {
+   // Given
+   UserCreateDTO userCreateDTO = new UserCreateDTO();
+   userCreateDTO.setEmail("user1@example.com");
+   userCreateDTO.setName("user1");
+   userCreateDTO.setPassword("user1Password");
 
-    // When
-    User user =  (User) new DtoUtils().convertToEntity(new User(), userCreateDTO);
+   // When
+   User user =  (User) new DtoUtils().convertToEntity(new User(), userCreateDTO);
 
-    // Then
-    assertEquals(user.getEmail(), userCreateDTO.getEmail());
-    assertEquals(user.getName(), userCreateDTO.getName());
-    assertEquals(user.getPassword(), userCreateDTO.getPassword());
-   }
+   // Then
+   assertEquals(user.getEmail(), userCreateDTO.getEmail());
+   assertEquals(user.getName(), userCreateDTO.getName());
+   assertEquals(user.getPassword(), userCreateDTO.getPassword());
+  }
 }
  ```
  
