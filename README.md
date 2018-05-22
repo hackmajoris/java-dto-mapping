@@ -215,7 +215,6 @@ public class UserController {
 
     @RequestMapping(value = "/update", method = RequestMethod.PATCH)
     public DTOEntity updateUser(@RequestBody UserUpdateDTO userUpdateDTO) {
-
      return updateService.updateUser(userUpdateDTO);
     }
 }
