@@ -272,7 +272,6 @@ public void userEntityToUserDto() {
  http://localhost:8080/api/create \
  -H 'Cache-Control: no-cache' \
  -H 'Content-Type: application/json' \
- -H 'Postman-Token: 76ac6fa4-41d1-481b-aa45-69b05096ebfb' \
  -d '{"name":"User number 1","email":"Email number 2", "password": "userPassword"}'
  ```
 ### User update
@@ -281,7 +280,6 @@ public void userEntityToUserDto() {
  http://localhost:8080/api/update \
  -H 'Cache-Control: no-cache' \
  -H 'Content-Type: application/json' \
- -H 'Postman-Token: 460a1683-d6b4-4544-9f5e-80dd6a645749' \
  -d '{"name":"User number 1","email":"Email number 2", "password": "pass"}'
  ```
 
@@ -291,6 +289,5 @@ public void userEntityToUserDto() {
  http://localhost:8080/api/list \
  -H 'Cache-Control: no-cache' \
  -H 'Content-Type: application/json' \
- -H 'Postman-Token: 24ff8d32-5357-411f-81f5-64dabcb2e4d1' \
  -d '{"name":"User number 1","email":"Email number 2", "password": "pass"}'
  ```
